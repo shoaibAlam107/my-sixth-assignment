@@ -10,31 +10,30 @@ const allCategories = ()=>{
     .then(res => res.json())
     .then(data => displayCategories(data.categories))
     .catch(err => console.log(err))
+   
 }
-
+allCategories();
 // "id": 1,
 //       "category": "Cat",
 //       "category_icon": "https://i.ibb.co.com/N7dM2K1/cat.png"
-
-const categoryCard =(category) =>{
-//  alert(id)
- fetch(`https://openapi.programming-hero.com/api/peddy/category/${category}`)
- .then(res => res.json())
- .then(data => displayCategories(data.category))
- .catch(err => console.log(err))
+// https://openapi.programming-hero.com/api/peddy/category/${id}
+const categoryCards =(id) =>{
+  fetch(`https://openapi.programming-hero.com/api/peddy/category/${id}`)
+    .then(res => res.json())
+    .then(data => displayCards(data.data))
+    .catch(err => console.log(err))
+   
 }
-
-
-
-const displayCategories =(categories) => {
+const displayCategories = (categories) => {
   const categoryContainer = document.getElementById('categories')
+
   categories.forEach(item => {
       console.log(item)
       const buttonContainer = document.createElement('div');
       buttonContainer.innerHTML = 
       `
-      <button onclick ="categoryCard('${item.category}')" class="btn">
-    <div class="lg:flex lg:gap-3 flex gap-1 ">
+      <button onclick ="categoryCards('${item.category}')" class="btn">
+    <div class="lg:flex lg:gap-3 flex gap-1  lg:px-7">
     <img class="h-5" src="${item.category_icon}" alt="">
     ${item.category}
     </div>
@@ -42,16 +41,7 @@ const displayCategories =(categories) => {
     `
     categoryContainer.append(buttonContainer)
   });
-      
-
-      
-      
-      
-
 }
-
-
-allCategories()
 
 const allPetCards = () =>{
     fetch('https://openapi.programming-hero.com/api/peddy/pets')
@@ -60,23 +50,28 @@ const allPetCards = () =>{
     .catch(err => console.log(err))
 }
 
-//   const demoPet =
-//     {
-//         petId: 2,
-//        breed: "Siamese",
-//         category: "Cat",
-//         date_of_birth: "2022-09-05",
-//         price: 800,
-//         image: "https://i.ibb.co.com/3Wzz41D/pet-2.jpg",
-//         gender: "Female",
-//         pet_details: "This affectionate female Siamese cat is known for her vocal nature and love for attention. Born on September 5, 2022, she enjoys interactive play and snuggles. Fully vaccinated and priced at $800, she's the perfect fit for cat lovers who appreciate an intelligent, engaging, and sociable feline companion.",
-//         vaccinated_status: "Fully",
-//        pet_name: "Mia"
-//       }
-  
-
 const displayCards =(pets) => {
     const petContainer =document.getElementById('pets')
+    petContainer.innerHTML=""
+
+    if(pets.length == 0){
+      petContainer.classList.remove('grid')
+      petContainer.innerHTML =
+      `
+      <div class="flex flex-col gap-6 justify-center items-center">
+
+      <img src="images/error.webp" alt="">
+      <h1 class="text-center font-bold text-xl">No Information Available</h1>
+      <p class="font-normal lg:text-sm  text-xs"> All birds were  sold. Please visit other pet sites,Thank You. </p>
+    </div>
+    `
+    }
+    else{
+      petContainer.classList.add('grid')
+    }
+    
+      
+
    pets.forEach(pet => {
     console.log(pet)
     const card =document.createElement('div')
@@ -107,16 +102,45 @@ const displayCards =(pets) => {
     </div>
 
    <div class="flex gap-2">
-   <img class="lg:w-3 lg:h-3 w-2 h-3 my-1" src="images/dollar-sign.png" alt="">
+   <img class="lg:w-3 lg:h-3 w-2 h-3 my-1"src="images/dollar-sign.png" alt="">
     <p class="font-normal lg:text-sm  text-xs "><span class="font-bold"> Price :</span> ${pet.price} $</p>
     </div>
-    
+     <div class="flex lg:gap-2 ">
+    <button onclick="" class="btn"><img src="images/like-account.png" alt=""></button>
+     <button onclick="" class="btn  text-[#0E7A81]">Adopt</button>
+     <button onclick="" class="btn  text-[#0E7A81]">Details</button>
+   </div>
   </div>
     
     `
     petContainer.append(card)
 
    })
+  
 }
 
 allPetCards();
+ 
+ 
+
+
+
+
+    
+
+
+
+
+  
+
+
+  
+  
+      
+
+      
+      
+      
+
+
+
