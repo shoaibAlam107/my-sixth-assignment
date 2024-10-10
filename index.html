@@ -117,7 +117,7 @@
            </div>
            
            <div class="navbar-end ">
-             <a class="btn bg-[#0E7A81] text-white p-2">Sort by Price</a>
+             <a id="sorted-btn" class="btn bg-[#0E7A81] text-white p-2">Sort by Price</a>
            </div>
          </div>
 
@@ -188,7 +188,24 @@
       </footer>
       <!-- footer section end -->
     </footer>
-    
+    <!-- modal -->
+   
+<button class="btn hidden" onclick="my_modal_5.showModal()">open modal</button>
+<dialog id="my_modal_5" class="modal modal-bottom sm:modal-middle ">
+  <div class="modal-box">
+    <div id="detail-modal"></div>
+
+    <div class="modal-action">
+      <form method="dialog">
+       
+        <button class="btn">Close</button>
+      </form>
+    </div>
+  </div>
+</dialog>
+
+
+
     <script src="js/peddy.js"></script>
         
     </body>
