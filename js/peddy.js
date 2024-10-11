@@ -38,6 +38,10 @@ const displayCategories = (categories) => {
     `
     categoryContainer.append(buttonContainer)
   });
+  document.getElementById('load-bars').classList.remove('hidden')
+  setTimeout( function (){
+    categoryCards()
+   },2000)
 }
 
 const allPetCards = () =>{
@@ -55,6 +59,10 @@ const petDetails =async(petId) =>{
 }
 
 const detailDisplay =(petData)=>{
+  document.getElementById('load-bars').classList.add('hidden')
+
+   
+
   console.log(petData)
   const detailContainer =document.getElementById('detail-modal')
   document.getElementById('my_modal_5').showModal();
@@ -84,25 +92,12 @@ const detailDisplay =(petData)=>{
     <p class="font-normal lg:text-sm  text-xs "><span class="font-bold"> Price :</span> ${petData.price} $</p>
     </div>
     <p  class="font-normal lg:text-sm  text-xs ">${petData.pet_details} </p>
-   
-   `
+    
+    `
+    }
+
  
 
-}
-// "status": true,
-// "message": "successfully fetched pet data using id 16",
-// "petData": {
-//   "petId": 16,
-//   "breed": "English Angora",
-//   "category": "Rabbit",
-//   "date_of_birth": "2023-08-05",
-//   "price": 300,
-//   "image": "https://i.ibb.co.com/zZHPJNh/pet-16.jpg",
-//   "gender": "Female",
-//   "pet_details": "This fluffy female English Angora rabbit, born on August 5, 2023, is known for her long, luxurious fur. Priced at $300, she's perfect for families who enjoy grooming and cuddling. She is not vaccinated.",
-//   "vaccinated_status": "Not",
-//   "pet_name": "Snowball"
-// }
 
 
 const displayCards =(pets) => {
@@ -137,7 +132,8 @@ const displayCards =(pets) => {
     <img
       src=${pet.image}
       class="w-full h-full object-cover "
-      alt="Shoes" />
+      alt="" />
+      
   </figure>
   <div class="px-0 py-2">
   <h2 class="font-bold text-xl">${pet.pet_name}</h2>
@@ -175,18 +171,27 @@ const displayCards =(pets) => {
   
 }
 
+
 allPetCards();
+
+let petsAll =[];
+const petsAllCards =() =>{
+  fetch('https://openapi.programming-hero.com/api/peddy/pets')
+  .then( res => res.json())
+  .then(data => {
+   allPets = data.pets;
+   displayCards(allPets);
+  })
+  .catch(err => console.log(err))
  
-//  const sortByPrice =() {
-//   document.getElementById('sorted-btn').
-//  }
+}
 
+document.getElementById('sorted-btn').onclick = () =>{
+  const sortedPets = allPets.sort((a, b) => b.price - a.price)
+  displayCards(sortedPets)
+}
 
-
-
-    
-
-
+petsAllCards()
 
 
   
