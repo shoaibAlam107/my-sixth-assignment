@@ -19,7 +19,8 @@ const categoryCards =(id) =>{
     .then(res => res.json())
     .then(data => displayCards(data.data))
     .catch(err => console.log(err))
-   
+    // document.getElementById('load-bars').classList.add('hidden')
+
 }
 const displayCategories = (categories) => {
   const categoryContainer = document.getElementById('categories')
@@ -38,10 +39,10 @@ const displayCategories = (categories) => {
     `
     categoryContainer.append(buttonContainer)
   });
-  document.getElementById('load-bars').classList.remove('hidden')
-  setTimeout( function (){
-    categoryCards()
-   },2000)
+  // document.getElementById('load-bars').classList.remove('hidden')
+  // setTimeout( function (){
+  //   categoryCards(`${item.category}`)
+  //  },2000)
 }
 
 const allPetCards = () =>{
@@ -59,10 +60,7 @@ const petDetails =async(petId) =>{
 }
 
 const detailDisplay =(petData)=>{
-  document.getElementById('load-bars').classList.add('hidden')
-
    
-
   console.log(petData)
   const detailContainer =document.getElementById('detail-modal')
   document.getElementById('my_modal_5').showModal();
@@ -158,8 +156,8 @@ const displayCards =(pets) => {
     </div>
 
      <div class="flex lg:gap-2 ">
-    <button onclick="" class="btn"><img src="images/like-account.png" alt=""></button>
-     <button onclick="" class="btn  text-[#0E7A81]">Adopt</button>
+    <button onclick="clickOnButton()" class="btn"><img src="images/like-account.png" alt=""></button>
+     <button onclick="showModal()" class="btn  text-[#0E7A81]">Adopt</button>
      <button onclick="petDetails(${pet.petId})" class="btn  text-[#0E7A81]">Details</button>
    </div>
   </div>
@@ -171,10 +169,23 @@ const displayCards =(pets) => {
   
 }
 
-
 allPetCards();
 
-let petsAll =[];
+const clickOnButton = () => {
+  const imgOnClick = document.createElement('img');
+  imgOnClick.classList = 
+  imgOnClick.innerHTML=   
+  `
+   img.src = '${pets.image}';
+    img.alt = '';
+  class ="w-28 h-28"
+    imageContainer.appendChild(img);
+  `
+   
+}
+
+
+let allPets =[];
 const petsAllCards =() =>{
   fetch('https://openapi.programming-hero.com/api/peddy/pets')
   .then( res => res.json())
@@ -193,9 +204,20 @@ document.getElementById('sorted-btn').onclick = () =>{
 
 petsAllCards()
 
-
+const adoptDisplay =()=>{
+   
   
-
+  document.getElementById('adopt-modal')
+  document.getElementById('my_modal_5').showModal();
+  // detailContainer.innerHTML= 
+  //   `
+  //   <div>
+  //   <img src="images/handshake (1).png" alt="">
+  //   <h2 class="font-bold text-center text-xl">Congratulation</h2>
+  //   </div>
+   
+  //   `
+}
 
   
   

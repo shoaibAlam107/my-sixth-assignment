@@ -111,7 +111,7 @@
       <section class="w-full mx-auto flex" >
         <div id="pets" class=" lg:w-[984px]  gap-3 ml-16  text-left grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 py-10">
         </div>
-        <div class="lg:w-96">
+        <div id="pic-on-click" class="lg:w-96 grid grid-cols-1  lg:grid-cols-2 lg:gap-2">
         </div>
       </section>
 
@@ -185,9 +185,23 @@
     </div>
   </div>
 </dialog>
-
-
-
+<!-- adopt modal -->
+<button class="btn hidden" onclick="my_modal_5.showModal()">open modal</button>
+<dialog id="my_modal_5" class="modal modal-bottom sm:modal-middle ">
+  <div id="adopt-modal" class="modal-box">
+    <div id="detail-modal"></div>
+    <div>
+      <img src="images/handshake (1).png" alt="">
+      <h2 class="font-bold text-center text-xl">Congratulation</h2>
+      </div>
+    <div class="modal-action">
+      <form method="dialog">
+       
+        <button class="btn">Close</button>
+      </form>
+    </div>
+  </div>
+</dialog>
     <script src="js/peddy.js"></script>
         
     </body>
